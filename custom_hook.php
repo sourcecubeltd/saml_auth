@@ -169,7 +169,7 @@ function saml_hook_post_user_created($user, $saml_attributes = array()) {
 function saml_hook_get_course_info($course) {
   $regs = null;
 
-  $regex = '/urn:mace:terena.org:schac:userStatus:(.+):(.+):(.+):(.+):(.+):(.+)/';
+  $regex = '/urn:mace:terena.org:s[c]?hac:userStatus:(.+):(.+):(.+):(.+):(.+):(.+)/';
 
   if (preg_match($regex, $course, $matches)) {
     $regs = $matches;

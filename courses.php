@@ -41,7 +41,8 @@ function get_course_mapping(&$DB, &$err) {
 function get_course_mapping_for_sync(&$err, $config) {
 
     $course_mapping = array();
-    if($config->supportcourses == 'external') {
+    //if($config->supportcourses == 'external') {
+    if(isset($config->externalcoursemappingdsn)) {
         require_once ("DBNewConnection.php"); 
         $DB_mapping = DBNewConnection($config->externalcoursemappingdsn);
         $rs = false;

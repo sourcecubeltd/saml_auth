@@ -156,7 +156,7 @@ define('SAML_INTERNAL', 1);
         $username = trim(strtolower($username));
 
         $saml_courses = array();
-        if($pluginconfig->supportcourses != 0 && isset($pluginconfig->samlcourses)) {
+        if($pluginconfig->supportcourses != 'nosupport' && isset($pluginconfig->samlcourses)) {
             if(!isset($saml_attributes[$pluginconfig->samlcourses])) {
                 $err['login'] = get_string("auth_saml_courses_not_found", "auth_saml", $pluginconfig->samlcourses);
                 auth_saml_error($err['login'], $CFG->wwwroot.'/auth/saml/login.php', $pluginconfig->samllogfile);
@@ -165,7 +165,7 @@ define('SAML_INTERNAL', 1);
         }
 
         // Obtain the course_mapping. Now $USER->mapped_courses have the mapped courses and $USER->mapped_roles the roles
-        if($pluginconfig->supportcourses != 0) {
+        if($pluginconfig->supportcourses != 'nosupport') {
             $any_course_active = false;
             include_once('course_mapping.php');
             if (!isset($SAML_COURSE_INFO)) {

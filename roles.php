@@ -29,7 +29,8 @@ function get_role_mapping(&$DB, &$err) {
 function get_role_mapping_for_sync(&$err, $config) {
 
     $role_mapping = array();
-    if($config->supportcourses == 'external') {
+    //if($config->supportcourses == 'external') {
+    if(isset($config->externalcoursemappingdsn)) {
         require_once ("DBNewConnection.php"); 
         $DB_mapping = DBNewConnection($config->externalrolemappingdsn);
         $rs = false;
