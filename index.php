@@ -33,6 +33,12 @@ define('SAML_INTERNAL', 1);
             throw(new Exception('simpleSAMLphp lib loader file does not exist: '.$saml_param->samllib.'/_autoload.php'));
         }
         include_once($saml_param->samllib.'/_autoload.php');
+        if(isset($_REQUEST['sp_source'])) {
+          $sp = $_REQUEST['sp_source'];
+        } else {
+          $sp = $saml_param->sp_source;
+        }
+        $as = new SimpleSAML_Auth_Simple($sp);
         $as = new SimpleSAML_Auth_Simple($saml_param->sp_source);
 
         if(isset($_GET["logout"])) {
@@ -108,7 +114,12 @@ define('SAML_INTERNAL', 1);
 	    // Not valid session. Ship user off to Identity Provider
         unset($USER);
         try {
-            $as = new SimpleSAML_Auth_Simple($saml_param->sp_source);
+            if(isset($_REQUEST['sp_source'])) {
+              $sp = $_REQUEST['sp_source'];
+            } else {
+              $sp = $saml_param->sp_source;
+            }
+            $as = new SimpleSAML_Auth_Simple($sp);
             $as->requireAuth();
         } catch (Exception $e) {
             $err['login'] = $e->getMessage();
