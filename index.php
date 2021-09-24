@@ -108,7 +108,12 @@ define('SAML_INTERNAL', 1);
 	    // Not valid session. Ship user off to Identity Provider
         unset($USER);
         try {
-            $as = new SimpleSAML_Auth_Simple($saml_param->sp_source);
+            if(isset($_REQUEST['sp_source'])) {
+              $sp = $_REQUEST['sp_source'];
+            } else {
+              $sp = $saml_param->sp_source;
+            }
+            $as = new SimpleSAML_Auth_Simple($sp);
             $as->requireAuth();
         } catch (Exception $e) {
             $err['login'] = $e->getMessage();

@@ -142,9 +142,9 @@ class auth_plugin_saml extends auth_plugin_base {
     function loginpage_hook() {
         global $CFG;
 
-        if (empty($CFG->alternateloginurl) && !(isset($_GET['saml']) && $_GET['saml'] === 'false')) {
+        /*if (empty($CFG->alternateloginurl) && !(isset($_GET['saml']) && $_GET['saml'] === 'false')) {
             $CFG->alternateloginurl = $CFG->wwwroot.'/auth/saml/login.php';
-        }
+        }*/
 
         // Prevent username from being shown on login page after logout
         $CFG->nolastloggedin = true;
